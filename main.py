@@ -1,7 +1,10 @@
 from fastapi import FastAPI
+from api import detect
 
-app = FastAPI
+app = FastAPI()
 
-@app.post("/predict")
-def predict():
-    return 
+@app.get("/")
+def root():
+    return {"hello":"World"}
+
+app.include_router(detect.router,prefix="/api")

@@ -4,3 +4,6 @@ lime
 scikit-image
 tensorflow
 matplotlib
+fastapi
+python-multipart
+uvicorn
