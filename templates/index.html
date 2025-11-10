@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepScan</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeepScan - Deepfake Detector</title>
+  <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
-    <form id="uploadForm"  enctype="multipart/form-data">
-        <label for="video-upload">Choose file to upload</label>
-        <input type="file" id="video-upload" name="videoFile" accept="video/*">
-        <button id="uploadBtn" type="submit">Upload video</button>
-    </form>
-        <script src="/static/script.js"></script>
+  <!-- ===== HEADER ===== -->
+  <header class="navbar">
+    <div class="nav-left">
+      <img src="/static/logo.png" alt="DeepScan Logo" class="logo" />
+      <span class="brand">DeepScan</span>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-link">Login</a>
+      <a href="#" class="nav-btn">Sign Up</a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-container">
+
+    <!-- UPLOAD SECTION -->
+    <section id="upload-section" class="section active">
+      <h1>Analyze Your Video</h1>
+      <p class="subtitle">Upload your video and let AI detect deepfakes instantly.</p>
+
+      <div class="upload-box">
+        <label for="file-input" class="upload-btn">Select Video File</label>
+        <input type="file" id="file-input" accept="video/*"  style="display:none;" />
+        <p class="drop-text">or drag & drop your video here</p>
+      </div>
+    </section>
+
+    <!-- ANALYZING SECTION -->
+    <section id="progress-section" class="section">
+      <h2>Analyzing your video...</h2>
+      <p class="subtitle">Please wait while we process frames and generate explanations.</p>
+      <div class="progress-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <p id="progress-status" class="progress-status">Processing...</p>
+    </section>
+
+    <!-- RESULT SECTION -->
+    <section id="result-section" class="section">
+      <h2>Result</h2>
+      <div class="result-card">
+        <p id="result-label" class="result-label">FAKE</p>
+        <p id="result-confidence" class="result-confidence">Confidence: 92%</p>
+        <img id="lime-img" class="lime-img hidden" alt="LIME Explanation" />
+      </div>
+      <button id="try-again" class="btn secondary">Scan Another Video</button>
+    </section>
+  
+  </main>
+  <script src="/static/script.js"></script>
 </body>
 </html>
