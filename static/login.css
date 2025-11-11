@@ -1,0 +1,161 @@
+* {
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9fafb;
+}
+
+.container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.left {
+    flex: 1;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.left h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.left h1 span {
+    color: #e63946;
+}
+
+.left p {
+    margin-bottom: 25px;
+    color: #444;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.input-box {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.input-box input:focus {
+    border-color: #e63946;
+    outline: none;
+}
+
+.google-btn {
+    display: none; /* Hidden for now */
+    width: 100%;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 15px;
+}
+
+.google-btn:hover {
+    background: #f1f1f1;
+}
+
+.login-btn {
+    width: 100%;
+    background-color: #e63946;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 5px;
+}
+
+.login-btn:hover {
+    background-color: #c72d3c;
+}
+
+.footer-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.footer-text a {
+    color: #e63946;
+    text-decoration: none;
+}
+
+.left small {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: #777;
+    text-align: center;
+}
+
+.left small a {
+    color: #e63946;
+}
+
+.right {
+    flex: 1;
+    background-color: #f6f8fb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+}
+
+.right h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+.right p {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+.right small {
+    display: block;
+    margin-top: 20px;
+    color: #777;
+}
+
+@media (max-width: 850px) {
+    .container {
+        flex-direction: column;
+    }
+    .right {
+        display: none;
+    }
+}
