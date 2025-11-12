@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeepScan - History</title>
+  <link rel="stylesheet" href="/static/history.css" />
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <div class="nav-left">
+      <h1 class="brand">
+        <span class="deep">Deep</span><span class="scan">Scan</span>
+      </h1>
+    </div>
+
+    <nav class="nav-center">
+      <a href="/dashboard" class="nav-link">Dashboard</a>
+      <a href="/history" class="nav-link active">History</a>
+    </nav>
+
+    <div class="nav-right">
+      <!-- User Icon (always shown here) -->
+      <div id="user-section" class="user-dropdown">
+        <img src="/static/user.png" alt="User" class="user-icon" id="userIcon">
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="history-container">
+    <h1>Your Scan History</h1>
+    <p class="subtitle">Review your previous deepfake analyses and manage saved results.</p>
+    <p id="no-data" style="display:none;">You have no scans yet. Try uploading a video!</p>
+
+    <div class="table-container">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Filename</th>
+            <th>Result</th>
+            <th>Confidence</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="history-body"></tbody>
+      </table>
+    </div>
+  </main>
+
+<script src="/static/history.js"></script>
+</body>
+</html>

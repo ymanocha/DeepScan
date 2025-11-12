@@ -199,8 +199,8 @@ if __name__ == "__main__":
     
     # Test your videos
     test_videos = [
-        "Demo_video/Real/aktnlyqpah.mp4",
-        "Demo_video/Fake/Fake_video(1).mp4"  
+        "demo_video/Real/aktnlyqpah.mp4",
+       
     ]
     
     for video_path in test_videos:

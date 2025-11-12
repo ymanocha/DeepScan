@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeepScan - Dashboard</title>
+  <link rel="stylesheet" href="/static/dashboard.css" />
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <div class="nav-left">
+      <h1 class="brand">
+        <span class="deep">Deep</span><span class="scan">Scan</span>
+      </h1>
+    </div>
+
+    <nav class="nav-center">
+      <a href="/dashboard" class="nav-link active">Dashboard</a>
+      <a href="/history" class="nav-link">History</a>
+    </nav>
+
+    <div class="nav-right">
+      <!-- User Icon (always shown here) -->
+      <div id="user-section" class="user-dropdown">
+        <img src="/static/user.png" alt="User" class="user-icon" id="userIcon">
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="dashboard-container">
+    <h1>Dashboard</h1>
+    <p class="subtitle">Here’s an overview of your DeepFake scan activity.</p>
+
+    <!-- ===== STAT CARDS ===== -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h2 id="total-videos">42</h2>
+        <p>Total Videos Analyzed</p>
+      </div>
+      <div class="stat-card">
+        <h2 id="fake-count">27</h2>
+        <p>Fake Videos Detected</p>
+      </div>
+      <div class="stat-card">
+        <h2 id="real-count">15</h2>
+        <p>Real Videos Detected</p>
+      </div>
+      <div class="stat-card">
+        <h2 id="accuracy">89%</h2>
+        <p>Average Confidence</p>
+      </div>
+    </div>
+
+    <!-- ===== CHART AREA ===== -->
+    <section class="charts-section">
+      <div class="chart-box">
+        <h3>Fake vs Real Distribution</h3>
+        <div class="chart-placeholder">[ Pie Chart Placeholder ]</div>
+      </div>
+      <div class="chart-box">
+        <h3>Videos Analyzed Over Time</h3>
+        <div class="chart-placeholder">[ Line Chart Placeholder ]</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- <script>
+    // ✅ Protect route — only show if logged in
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+    }
+  </script> -->
+  <script src="/static/dashboard.js"></script>
+
+</body>
+</html>

@@ -5,23 +5,41 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
      const fileInput = document.getElementById("file-input");
-    // const fileNameEl = document.getElementById("file-name");
-    //  const uploadBtn = document.getElementById("uploadBtn");
+     // const fileNameEl = document.getElementById("file-name");
+     //  const uploadBtn = document.getElementById("uploadBtn");
      const progressSection = document.getElementById("progress-section");
      const progressBar = document.getElementById("progress-bar");
 
-    //  const resultCard = document.getElementById("result-card");
+     //  const resultCard = document.getElementById("result-card");
      const resultConfidence = document.getElementById("result-confidence");
-    //  const statusText = document.getElementById("status-text");
+     //  const statusText = document.getElementById("status-text");
      const resultLabel = document.getElementById("result-label");
      const limeImg = document.getElementById("lime-img");
      const tryAgainBtn = document.getElementById("try-again");
+
+       const token = localStorage.getItem("token");
+
+  const authButtons = document.getElementById("auth-buttons");
+  const userSection = document.getElementById("user-section");
+
+  if (token) {
+    
+    if (authButtons) authButtons.style.display = "none";
+    if (userSection) userSection.style.display = "block";
+
+  } else {
+    
+    if (authButtons) authButtons.style.display = "flex";
+    if (userSection) userSection.style.display = "none";
+ 
+  }
+
 
 
      let simulateInterval = null;
       
      tryAgainBtn.addEventListener("click", () => {
-       resultSection.classList.remove("active");
+     resultSection.classList.remove("active");
      uploadSection.classList.add("active");
      progressSection.classList.remove("active");
      progressBar.style.width = "0%";
@@ -67,17 +85,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function showResult(body) {
         stopSimulatedProgress();
         progressBar.style.width = "100%";
-       setTimeout(() => {
-     progressSection.classList.remove("active");
-     resultSection.classList.add("active");
+        setTimeout(() => {
+        progressSection.classList.remove("active");
+        resultSection.classList.add("active");
 
-      // Populate result fields
-      resultLabel.textContent = body.final_label || "UNKNOWN";
+     
+      resultLabel.textContent = body.result || "UNKNOWN";
       resultConfidence.textContent =
-        "Confidence: " + (body.confidence_score || "N/A");
+        "Confidence: " + (body.confidence?.toFixed(2) + "%" || "N/A");
 
       if (body.lime_explanation_path) {
-        limeImg.src = "/" + body.lime_explanation_path;
+        limeImg.src = body.lime_image;
         limeImg.classList.remove("hidden");
       } else {
         limeImg.classList.add("hidden");
@@ -95,7 +113,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
      uploadSection.classList.remove("active");
      progressSection.classList.add("active");
      resultSection.classList.remove("active");
-    startSimulatedProgress();
+     startSimulatedProgress();
 
     try{
         const formdata = new FormData(); //
@@ -103,8 +121,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
         
         const res = await fetch("/api/detect",{
             method: "POST",
-            body: formdata
+            body: formdata,
+            headers: token ? {Authorization: `Bearer ${token}`} : {}
         });
+  
 
         if (!res.ok) {
             const errText = await res.text().catch(()=>"");
