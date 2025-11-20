@@ -5,4 +5,5 @@ demo_videos/
 temp_videos/
 .env
 test_db.py
+.vscode/
 temp_lime/
