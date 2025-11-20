@@ -1,39 +1,51 @@
 document.addEventListener("DOMContentLoaded", ()=>{
      const uploadSection = document.getElementById("upload-section");
-    
-    const resultSection = document.getElementById("result-section");
-
-
+     const resultSection = document.getElementById("result-section");
      const fileInput = document.getElementById("file-input");
      // const fileNameEl = document.getElementById("file-name");
      //  const uploadBtn = document.getElementById("uploadBtn");
      const progressSection = document.getElementById("progress-section");
      const progressBar = document.getElementById("progress-bar");
-
      //  const resultCard = document.getElementById("result-card");
      const resultConfidence = document.getElementById("result-confidence");
      //  const statusText = document.getElementById("status-text");
      const resultLabel = document.getElementById("result-label");
      const limeImg = document.getElementById("lime-img");
      const tryAgainBtn = document.getElementById("try-again");
-
-       const token = localStorage.getItem("token");
-
-  const authButtons = document.getElementById("auth-buttons");
-  const userSection = document.getElementById("user-section");
-
-  if (token) {
+     const token = localStorage.getItem("token");
+     const uploadBox = document.getElementById("upload-box");
     
-    if (authButtons) authButtons.style.display = "none";
-    if (userSection) userSection.style.display = "block";
 
-  } else {
-    
-    if (authButtons) authButtons.style.display = "flex";
-    if (userSection) userSection.style.display = "none";
- 
-  }
+// Prevent browser from opening the dropped file
+   ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+  uploadBox.addEventListener(eventName, e => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+});
 
+// Highlight when file is dragged over
+   ["dragenter", "dragover"].forEach(eventName => {
+    uploadBox.addEventListener(eventName, () => {
+    uploadBox.classList.add("drag-hover");
+  });
+});
+
+// Remove highlight when dragging leaves
+   ["dragleave", "drop"].forEach(eventName => {
+    uploadBox.addEventListener(eventName, () => {
+    uploadBox.classList.remove("drag-hover");
+  });
+});
+
+// Handle dropped file
+uploadBox.addEventListener("drop", e => {
+  const files = e.dataTransfer.files;
+  if (!files.length) return;
+
+  fileInput.files = files;
+  fileInput.dispatchEvent(new Event("change"));
+});
 
 
      let simulateInterval = null;
@@ -71,7 +83,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         simulateInterval = setInterval(()=>{
             const jump = Math.random()*4;
             progressCounter = Math.min(90,progressCounter+jump);
-            progressBar.style.width=progressCounter+"%"},250);
+            progressBar.style.width=progressCounter+"%"},1200);
         }
 
 
@@ -94,10 +106,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
       resultConfidence.textContent =
         "Confidence: " + (body.confidence?.toFixed(2) + "%" || "N/A");
 
-      if (body.lime_explanation_path) {
-        limeImg.src = body.lime_image;
-        limeImg.classList.remove("hidden");
-      } else {
+     
+        if (body.lime_image) {
+           limeImg.src = body.lime_image;
+           limeImg.classList.remove("hidden");
+ 
+        } else {
         limeImg.classList.add("hidden");
       }
     }, 500);
@@ -119,7 +133,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         const formdata = new FormData(); //
         formdata.append("file", file);
         
-        const res = await fetch("/api/detect",{
+        const res = await fetch("/api/scans",{
             method: "POST",
             body: formdata,
             headers: token ? {Authorization: `Bearer ${token}`} : {}

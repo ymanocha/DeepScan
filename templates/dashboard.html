@@ -5,29 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DeepScan - Dashboard</title>
   <link rel="stylesheet" href="/static/dashboard.css" />
+  <link rel="stylesheet" href="/static/navbar.css" />  
+
 </head>
 <body>
   <!-- ===== NAVBAR ===== -->
-  <header class="navbar">
-    <div class="nav-left">
-      <h1 class="brand">
-        <span class="deep">Deep</span><span class="scan">Scan</span>
-      </h1>
-    </div>
-
-    <nav class="nav-center">
-      <a href="/dashboard" class="nav-link active">Dashboard</a>
-      <a href="/history" class="nav-link">History</a>
-    </nav>
-
-    <div class="nav-right">
-      <!-- User Icon (always shown here) -->
-      <div id="user-section" class="user-dropdown">
-        <img src="/static/user.png" alt="User" class="user-icon" id="userIcon">
-      </div>
-    </div>
-  </header>
-
+  <div id="navbar-container"></div>
   <!-- ===== MAIN CONTENT ===== -->
   <main class="dashboard-container">
     <h1>Dashboard</h1>
@@ -36,34 +19,36 @@
     <!-- ===== STAT CARDS ===== -->
     <div class="stats-grid">
       <div class="stat-card">
-        <h2 id="total-videos">42</h2>
+        <h2 id="total-videos"></h2>
         <p>Total Videos Analyzed</p>
       </div>
       <div class="stat-card">
-        <h2 id="fake-count">27</h2>
+        <h2 id="fake-count"></h2>
         <p>Fake Videos Detected</p>
       </div>
       <div class="stat-card">
-        <h2 id="real-count">15</h2>
+        <h2 id="real-count"></h2>
         <p>Real Videos Detected</p>
       </div>
       <div class="stat-card">
-        <h2 id="accuracy">89%</h2>
+        <h2 id="accuracy"></h2>
         <p>Average Confidence</p>
       </div>
     </div>
 
     <!-- ===== CHART AREA ===== -->
-    <section class="charts-section">
-      <div class="chart-box">
-        <h3>Fake vs Real Distribution</h3>
-        <div class="chart-placeholder">[ Pie Chart Placeholder ]</div>
-      </div>
-      <div class="chart-box">
-        <h3>Videos Analyzed Over Time</h3>
-        <div class="chart-placeholder">[ Line Chart Placeholder ]</div>
-      </div>
-    </section>
+   <section class="charts-section">
+  <div class="chart-box">
+    <h3>Fake vs Real Distribution</h3>
+    <canvas id="pieChart"></canvas>
+  </div>
+
+  <div class="chart-box">
+    <h3>Videos Analyzed Over Time</h3>
+    <canvas id="lineChart"></canvas>
+  </div>
+</section>
+
   </main>
 
   <!-- <script>
@@ -73,6 +58,9 @@
       window.location.href = "/login";
     }
   </script> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="/static/navbar.js"></script>
   <script src="/static/dashboard.js"></script>
 
 </body>

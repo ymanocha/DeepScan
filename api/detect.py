@@ -12,8 +12,7 @@ from api.auth import SECRET_KEY, ALGORITHM
 router = APIRouter()
 
 detector = EnsembleDeepfakeDetector(
-    "Model/resnet50_model_ep10.keras",
-    "Model/resnet50_model_ep10(2).keras",
+    "Model/efficientnet_modelB7.keras",
     demo_mode=True
 )
 
@@ -25,7 +24,7 @@ def get_db():
         db.close()
 
 
-@router.post("/detect")
+@router.post("/")
 async def detect(
     file: UploadFile = File(...),
     authorization: str = Header(None),
@@ -53,7 +52,7 @@ async def detect(
             token = authorization.split("Bearer ")[1]
             payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
             user_email = payload.get("sub")
-            print("🔑 USER:", user_email)
+            print("USER:", user_email)
         except (JWTError, IndexError):
             print("Invalid token format or decode error")
 
@@ -65,6 +64,7 @@ async def detect(
             if lime_path and os.path.exists(lime_path):
                 lime_path = str(pathlib.Path(lime_path).resolve())
                 unique_id = uuid.uuid4().hex[:8]
+
                 new_lime_path = f"temp_videos/{unique_id}_{file.filename}_lime.png"
                 shutil.copy(lime_path, new_lime_path)
                 lime_path = new_lime_path
@@ -94,7 +94,13 @@ async def detect(
         except Exception as e:
             print(" Upload or DB error:", e)
             raise HTTPException(status_code=500, detail=f"Error saving scan: {str(e)}")
+    else:
+        if lime_path and os.path.exists(lime_path):
+             new_name = f"{uuid.uuid4().hex}.png"
+             public_path = f"temp_lime/{new_name}"
+             shutil.copy(lime_path, public_path)
 
+             lime_url = f"/temp_lime/{new_name}"
 
     return {
         "result": result_label,

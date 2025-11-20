@@ -1,0 +1,42 @@
+<header class="navbar">
+  <div class="nav-left">
+    <h1 class="brand">
+      <span class="deep">Deep</span><span class="scan">Scan</span>
+    </h1>
+  </div>
+
+  <nav class="nav-center">
+    <a href="/" class="nav-link">Scan</a>
+    <a href="/dashboard" class="nav-link">Dashboard</a>
+    <a href="/history" class="nav-link">History</a>
+  </nav>
+
+  <div class="nav-right">
+    <div id="auth-buttons">
+      <a href="/login" class="nav-link">Login</a>
+      <a href="/signup" class="nav-btn">Sign Up</a>
+    </div>
+
+  <div id="user-section" class="user-dropdown" style="display:none;">
+  <img src="/static/user.png" class="user-icon" id="userIcon">
+
+  <div class="dropdown-menu" id="dropdownMenu">
+    <button id="logout-btn" class="logout-btn">Log out</button>
+      </div>
+  </div>
+
+  </div>
+</header>
+
+<!-- <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPath = window.location.pathname;
+
+  document.querySelectorAll(".nav-link").forEach(link => {
+    if (link.getAttribute("href") === currentPath) {
+      link.classList.add("active");
+    }
+  });
+});
+</script> -->
+

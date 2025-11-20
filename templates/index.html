@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DeepScan - Deepfake Detector</title>
   <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="stylesheet" href="/static/navbar.css">
+
 </head>
 <body>
   <!-- ===== HEADER ===== -->
-  <header class="navbar">
+  <!-- <header class="navbar">
     <div class="nav-left">
       <h1 class="brand"><span class="deep">Deep</span><span class="scan">Scan</span></h1>
     </div>
@@ -19,18 +21,19 @@
     </nav>
 
     <div class="nav-right">
-      <!-- Login/Signup Buttons -->
+      
       <div id="auth-buttons">
         <a href="/login" class="nav-link">Login</a>
         <a href="/signup" class="nav-btn">Sign Up</a>
       </div>
 
-      <!-- User Icon (hidden initially) -->
+    
       <div id="user-section" class="user-dropdown" style="display: none;">
         <img src="/static/user.png" alt="User" class="user-icon" id="userIcon">
       </div>
     </div>
-  </header>
+  </header> -->
+  <div id="navbar-container"></div>
 
  
   <main class="main-container">
@@ -39,7 +42,7 @@
       <h1>Analyze Your Video</h1>
       <p class="subtitle">Upload your video and let AI detect deepfakes instantly.</p>
 
-      <div class="upload-box">
+      <div class="upload-box" id="upload-box">
         <label for="file-input" class="upload-btn">Select Video File</label>
         <input type="file" id="file-input" accept="video/*" style="display:none;" />
         <p class="drop-text">or drag & drop your video here</p>
@@ -67,7 +70,9 @@
       <button id="try-again" class="btn secondary">Scan Another Video</button>
     </section>
   </main>
-
+  <script src="/static/navbar.js"></script>
   <script src="/static/script.js"></script>
+
+
 </body>
 </html>

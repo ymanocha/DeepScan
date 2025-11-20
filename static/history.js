@@ -2,16 +2,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
   const tableBody = document.getElementById("history-body");
   const noData = document.getElementById("no-data");
-
+  
   if (!token) {
     alert("Please login to view your scan history");
     window.location.href = "/login";
     return;
   }
-
+   
+  
   async function loadHistory() {
     try {
-      const res = await fetch("/api/history", {
+      const res = await fetch("/api/scans", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -44,30 +45,32 @@ document.addEventListener("DOMContentLoaded", () => {
         tableBody.appendChild(row);
       });
     } catch (err) {
-      console.error("⚠️ Error loading history:", err);
+      console.error("Error loading history:", err);
     }
   }
 
   document.addEventListener("click", async (e) => {
-    if (e.target.classList.contains("view-btn")) {
+    const viewBtn = e.target.closest(".view")
+    if (viewBtn) {
       const lime = e.target.dataset.lime;
       if (!lime) return alert("No image available for this scan.");
       window.open(lime, "_blank");
     }
-
-    if (e.target.classList.contains("delete-btn")) {
+    
+    const deleteBtn = e.target.closest(".delete")
+    if (deleteBtn) {
       const id = e.target.dataset.id;
       if (!confirm("Are you sure you want to delete this scan?")) return;
 
       try {
-        const res = await fetch(`/api/history/${id}`, {
+        const res = await fetch(`/api/scans/${id}`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error(`Delete failed: ${res.status}`);
         loadHistory();
       } catch (err) {
-        console.error("⚠️ Error deleting scan:", err);
+        console.error("Error deleting scan:", err);
       }
     }
   });

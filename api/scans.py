@@ -17,7 +17,7 @@ def get_db():
     finally:
         db.close()
 
-@router.get("/history")
+@router.get("/")
 def list_history(current_user: str = Depends(get_current_user), db: Session = Depends(get_db)):
     scans = db.query(Scan).filter(Scan.user_email == current_user.email).order_by(Scan.created_at.desc()).all()
     return scans
@@ -39,22 +39,26 @@ def delete_scan(
     db: Session = Depends(get_db),
     current_user: str = Depends(get_current_user)
 ):
-    scan = db.query(Scan).filter(Scan.id==scan_id, Scan.user_email ==  current_user.email).first()
+    scan = db.query(Scan).filter(
+        Scan.id == scan_id, 
+        Scan.user_email == current_user.email
+    ).first()
+
     if not scan:
         raise HTTPException(status_code=404, detail="Scan not found")
-    
 
     try:
-        if scan.lime_image :
+        if scan.lime_image:
             lime_path = scan.lime_image.split("/storage/v1/object/public/scans")[-1]
             supabase.storage.from_("scans").remove([lime_path])
     except Exception as e:
-         print(f"Supabase deletion error: {e}")
+        print(f"Supabase deletion error: {e}")
 
-         db.delete(scan)
-         db.commit()
+    db.delete(scan)
+    db.commit()
 
-         return
+    return {"message": "Scan deleted successfully"}
+
 
 
 @router.get("/dashboard/data")
@@ -88,5 +92,5 @@ def get_dashboard(current_user: str = Depends(get_current_user), db: Session = D
         "fake": fake_count,
         "real": real_count,
         "avg_confidence": round(avg_confidence or 0, 2),
-        "trend": chart_data,
+        "history": chart_data,
     }

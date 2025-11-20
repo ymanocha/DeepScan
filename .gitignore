@@ -5,3 +5,4 @@ demo_videos/
 temp_videos/
 .env
 test_db.py
+temp_lime/

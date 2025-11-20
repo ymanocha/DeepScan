@@ -5,29 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DeepScan - History</title>
   <link rel="stylesheet" href="/static/history.css" />
+  <link rel="stylesheet" href="/static/navbar.css" />
 </head>
 <body>
-  <!-- ===== NAVBAR ===== -->
-  <header class="navbar">
-    <div class="nav-left">
-      <h1 class="brand">
-        <span class="deep">Deep</span><span class="scan">Scan</span>
-      </h1>
-    </div>
 
-    <nav class="nav-center">
-      <a href="/dashboard" class="nav-link">Dashboard</a>
-      <a href="/history" class="nav-link active">History</a>
-    </nav>
 
-    <div class="nav-right">
-      <!-- User Icon (always shown here) -->
-      <div id="user-section" class="user-dropdown">
-        <img src="/static/user.png" alt="User" class="user-icon" id="userIcon">
-      </div>
-    </div>
-  </header>
-
+   <div id="navbar-container"></div>
   <!-- ===== MAIN CONTENT ===== -->
   <main class="history-container">
     <h1>Your Scan History</h1>
@@ -49,7 +32,7 @@
       </table>
     </div>
   </main>
-
+<script src="/static/navbar.js"></script>
 <script src="/static/history.js"></script>
 </body>
 </html>

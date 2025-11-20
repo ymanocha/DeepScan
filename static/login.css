@@ -32,14 +32,17 @@ body {
     align-items: center;
 }
 
-.left h1 {
-    font-size: 2rem;
+.brand {
+   font-size: 2rem;
     font-weight: 700;
     margin-bottom: 5px;
 }
+.brand .deep {
+  color: #111827;
+}
 
-.left h1 span {
-    color: #e63946;
+.brand .scan {
+  color: #ef4444;
 }
 
 .left p {

@@ -6,6 +6,7 @@ from api import detect, auth, scans
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/temp_lime", StaticFiles(directory="temp_lime"), name="temp_lime")
 
 @app.get("/signup")
 def serve_signup():
@@ -36,6 +37,6 @@ async def root():
 # def protected_route(user: str = Depends(get_current_user)):
 #     return {"msg": f"Hello, {user}"}
 
-app.include_router(scans.router,prefix="/api")
-app.include_router(detect.router,prefix="/api")
-app.include_router(auth.router,prefix="/auth")
+app.include_router(scans.router,prefix="/api/scans")
+app.include_router(detect.router,prefix="/api/scans")
+app.include_router(auth.router,prefix="/api/auth")
